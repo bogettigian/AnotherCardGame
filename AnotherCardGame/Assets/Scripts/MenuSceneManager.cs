@@ -13,9 +13,24 @@ public class MenuSceneManager : MonoBehaviour
 		actualScene = SceneManager.GetActiveScene();
 	}
 
+	public void goToTrucoOptionsScene()
+	{
+		SceneManager.LoadScene("TrucoOptionsScene", LoadSceneMode.Single);
+	}
+
 	public void goToTrucoScene()
 	{
 		SceneManager.LoadScene("TrucoScene", LoadSceneMode.Single);
+	}
+
+	public void goToChinScene()
+	{
+		
+	}
+
+	public void goToLibreScene()
+	{
+		
 	}
 
 
