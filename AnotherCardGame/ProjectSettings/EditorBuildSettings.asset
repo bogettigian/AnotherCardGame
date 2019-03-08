@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TrucoScene.unity
     guid: 32d5a71bc9a05f94597c8af847015bfd
+  - enabled: 1
+    path: Assets/Scenes/NetworkMenuScene.unity
+    guid: 2e0bc34f27afbfe4284dda261fc471f1
+  - enabled: 1
+    path: Assets/Scenes/NetworkLoadScene.unity
+    guid: e2c61c1199cd6d643a9b9f64edb4fc7a
   m_configObjects: {}
