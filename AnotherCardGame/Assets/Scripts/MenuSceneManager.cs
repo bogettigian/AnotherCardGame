@@ -33,5 +33,10 @@ public class MenuSceneManager : MonoBehaviour
 		
 	}
 
+    public void GoToNetworkManuScene()
+    {
+        SceneManager.LoadScene("NetworkMenuScene", LoadSceneMode.Single);
+    }
+
 
 }
