@@ -5,15 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuSceneManager : MonoBehaviour
 {
+    private GameSettings _Settings { get; set; }
 
-	public Scene actualScene { get; set; }
-	
-	void Start()
-	{
-		actualScene = SceneManager.GetActiveScene();
-	}
+    public void Start()
+    {
+        _Settings = GameObject.Find("GameSettings").GetComponent<GameSettings>();
+    }
 
-	public void goToTrucoOptionsScene()
+    public void goToTrucoOptionsScene()
 	{
 		SceneManager.LoadScene("TrucoOptionsScene", LoadSceneMode.Single);
 	}
@@ -33,10 +32,9 @@ public class MenuSceneManager : MonoBehaviour
 		
 	}
 
-    public void GoToNetworkManuScene()
+    public void GoToNetworkManuScene(int PlayerAmmount)
     {
+        _Settings._PlayerAmmount = PlayerAmmount;
         SceneManager.LoadScene("NetworkMenuScene", LoadSceneMode.Single);
     }
-
-
 }
