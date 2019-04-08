@@ -6,6 +6,9 @@ using BeardedManStudios.Forge.Networking.Unity;
 using UnityEngine.SceneManagement;
 using BeardedManStudios.SimpleJSON;
 
+// ejemplo sacado de:
+// https://github.com/guser9822/unity-forge-markui
+
 public class Networkmanager : MonoBehaviour
 {
     private GameSettings _Settings { get; set; }
@@ -26,11 +29,7 @@ public class Networkmanager : MonoBehaviour
         NetWorker server = new TCPServer(_Settings._PlayerAmmount);
         ((TCPServer)server).Connect();
 
-        ForgeNetworkManager = new GameObject("ForgeNetworkManager");
-        mgr = ForgeNetworkManager.AddComponent<NetworkManager>();
-
-        JSONNode MasterServerData = mgr.MasterServerRegisterData(server, "asd1", "asd2", "asd3", "asd4");
-        mgr.Initialize(server, _IP, _Port, MasterServerData);
+        Connected(server);
 
         SceneManager.LoadScene("NetworkLoadScene", LoadSceneMode.Single);
     }
@@ -40,12 +39,23 @@ public class Networkmanager : MonoBehaviour
         NetWorker client = new TCPClient();
         ((TCPClient)client).Connect(_IP ,_Port);
 
-        ForgeNetworkManager = new GameObject("ForgeNetworkManager");
-        mgr = ForgeNetworkManager.AddComponent<NetworkManager>();
+        Connected(client);
+    }
 
-        JSONNode MasterServerData = mgr.MasterServerRegisterData(client, "asd1", "asd2", "asd3", "asd4");
-        mgr.Initialize(client, _IP, _Port, MasterServerData);
+    private void Connected(NetWorker networker)
+    {
+        if (!networker.IsBound){
+            print("Networker failed to bind");
+            return;
+        }
 
-        SceneManager.LoadScene("NetworkLoadScene", LoadSceneMode.Single);
+        if(mgr == null && ForgeNetworkManager == null){
+            ForgeNetworkManager = new GameObject("ForgeNetworkManager");
+            mgr = ForgeNetworkManager.AddComponent<NetworkManager>();
+        }else{
+            mgr = Instantiate(ForgeNetworkManager).GetComponent<NetworkManager>();
+        }
+
+        mgr.Initialize(networker);
     }
 }
